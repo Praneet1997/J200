@@ -1,0 +1,33 @@
+<launch>
+  <node pkg="robot_localization" type="ukf_localization_node" name="ukf_se" clear_params="true">
+    <rosparam command="load" file="$(find robot_localization)/params/ukf_template.yaml" />
+    <param name="/ukf_se/frequency" value="300"/>
+    <param name="/ukf_se/base_link_frame" value="odom"/>
+    <rosparam param="/ukf_se/odom0_config">[true,true,true,
+                                            true,true,true,
+                                            true,true,true,
+                                            true,true,true,
+                                            true,true,true]
+    </rosparam>
+    <param name="/ukf_se/odom0_relative" value="true"/>
+    <param name="/ukf_se/odom0_pose_rejection_threshold" value="10000000"/>
+    <param name="/ukf_se/odom0_twist_rejection_threshold" value="10000000"/>
+
+    <param name="/ukf_se/imu0" value="/imu/data"/>
+    <rosparam param="/ukf_se/imu0_config">[true, true, true,
+                                           true,  true,  false                                                   ,
+                                           true,  true,  true,
+                                           true,  true,  true,
+                                           true,  true,  true]
+    </rosparam>
+    <param name="/ukf_se/imu0_differential" value="true"/>
+    <param name="/ukf_se/imu0_relative" value="false"/>
+    <param name="/ukf_se/use_control" value="false"/>
+
+    <!--  Placeholder for output topic remapping
+    <remap from="odometry/filtered" to=""/>
+    <remap from="accel/filtered" to=""/>
+    -->
+
+  </node>
+</launch>
